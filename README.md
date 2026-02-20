@@ -1,10 +1,10 @@
 # Phishing Email Analysis Project
 
 ## 📌 Project Overview
-This project demonstrates a manual and technical analysis of a suspicious email to identify phishing indicators. The goal was to dissect the email's headers, body content, and embedded links to determine its legitimacy and intent.
+This project demonstrates a manual and technical analysis of a suspicious email to identify phishing indicators. The goal was to analyze the altered email address, mismatched URL and legitimacy of the mail using the 3 pillars of email authentication(SPF/DKIM/DMARC).
 
 ## 🛠️ Tools Used
-* **Header Analysis:** [Google Admin Toolbox MessageHeader](https://toolbox.googleapps.com)
+* **Header Analysis:** [MXToolboc Header Analyzerr](https://mxtoolbox.com/EmailHeaders.aspx)
 * **Visual Inspection:** Manual "Hover-over" technique for URL verification
 * **Documentation:** GitHub Markdown for reporting
 
@@ -13,17 +13,18 @@ This project demonstrates a manual and technical analysis of a suspicious email 
 ## 🔍 Methodology: How I Approached the Task
 
 ### 1. Initial Analysis of the Email Body
-I began by reviewing the [Phishing sample.txt](./Phishing%20sample.txt) for common "social engineering" red flags. I looked for:
-* **Sense of Urgency:** Threats of account suspension.
+I began by reviewing the [Phishing sample.txt](./Phishing%20sample.txt), which says "Zonnepanelen voor een goede prijs" (Solar panels at a good price), to understand common "social engineering" red flags. I looked for:
+* **Sense of Urgency:** Threats of account suspension.	
 * **Generic Greetings:** Lack of a personalized name.
 * **Grammar/Spelling:** Inconsistent branding or tone.
 
 ### 2. Identifying Sender Spoofing
-I examined the "From" address and compared it against the "Return-Path" in the email metadata. I captured evidence of a mismatched domain which confirmed the sender was impersonating a legitimate brand.
-![Sender Spoofing Evidence](./Header%20spoofing.png)
+I examined the "From" address and compared it against the "Return-Path" in the email metadata. I captured evidence of a mismatched domain, where the Yellow highlight explains that the email domain is serenitepure.fr. This is a French domain likely related to health/beauty ("sérénité pure"), which has absolutely nothing to do with solar panels in the Netherlands.
+Whereas the Red underline path states the hidden address where "bounce" messages or errors are sent. It reveals the actual server that sent the mail i.e. a German domain (.de) email.![Sender Spoofing Evidence](./Header%20spoofing.png)
 
 ### 3. URL Verification (The Hover Test)
-Before clicking any buttons, I performed a "hover test" on the call-to-action. As documented in the screenshot below, the actual destination URL did not match the official website of the company.
+
+As documented in the screenshot below, the actual destination URL( http://go.nltrck.com ) did not match the official text "Klik hier voor 2 a 3 vrijblijvende offertes."
 ![Mismatched URL Evidence](./Mismatched%20URL.png)
 
 ### 4. Technical Header Breakdown
@@ -41,4 +42,4 @@ Based on the **authentication failures** and **malicious redirects** identified,
 * Use the "Hover-over" rule for every link to prevent redirection to malicious domains.
 
 ---
-*Developed by [Your Name] | Cybersecurity Beginner Project*
+*Developed by [Devansh] | Cybersecurity Project*
